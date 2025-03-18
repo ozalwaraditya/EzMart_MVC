@@ -26,9 +26,20 @@ namespace EzMartWeb.Controllers
         [HttpPost]
         public IActionResult Create(Category category)
         {
-            _context.Categories.Add(category);
-            _context.SaveChanges();
-            return RedirectToAction("Index");
+            //Custom Validation
+            if(category.Name == category.DisplayOrder.ToString())
+            {
+                ModelState.AddModelError("Name", "Category Name and Display Order cannot be same!!!");
+            }
+            if (ModelState.IsValid)
+            {
+                _context.Categories.Add(category);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
         }
     }
 }
+
+
