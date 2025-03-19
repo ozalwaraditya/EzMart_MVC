@@ -1,0 +1,44 @@
+﻿@model Category
+
+<form asp-controller="Category" asp-action="Edit" method="post">
+    <div class="border p-3 mt-4">
+        <input asp-for="Id" hidden/>
+        @* Title *@
+        <div class="row pb-2">
+            <h2 class="text-primary">Edit Category</h2>
+            <hr />
+        </div>
+
+        @* Category Name *@
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">Category Name</label>
+            <input asp-for="Name" class="form-control" placeholder="Enter category name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        @* Display Order *@
+        <div class="mb-3">
+            <label asp-for="DisplayOrder" class="form-label">Display Order</label>
+            <input asp-for="DisplayOrder" type="number" class="form-control" placeholder="Enter display order" />
+            <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+        </div>
+
+        @* Submit Button *@
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Create
+            </button>
+            <a asp-controller="Category" asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Back to List
+            </a>
+        </div>
+    </div>
+</form>
+
+
+@* Client Side Validation - build in*@
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial.cshtml" />
+    }
+}
