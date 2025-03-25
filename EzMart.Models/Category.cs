@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace EzMartWeb.Models
+namespace EzMart.Models
 {
     public class Category
     {
@@ -12,7 +12,7 @@ namespace EzMartWeb.Models
         [MaxLength(50)]
         [DisplayName("Category Name")]
         public string Name { get; set; }
-        [Range(1, 100,ErrorMessage ="Custom Error Message")]
+        [Range(1, 100, ErrorMessage = "Custom Error Message")]
         public int DisplayOrder { get; set; }
     }
 }

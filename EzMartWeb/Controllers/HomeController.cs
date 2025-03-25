@@ -1,5 +1,5 @@
 using System.Diagnostics;
-using EzMartWeb.Models;
+using EzMart.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EzMartWeb.Controllers

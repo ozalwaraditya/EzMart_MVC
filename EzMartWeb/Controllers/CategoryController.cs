@@ -1,5 +1,5 @@
-﻿using EzMartWeb.Data;
-using EzMartWeb.Models;
+﻿using EzMart.DataAccess.Data;
+using EzMart.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EzMartWeb.Controllers

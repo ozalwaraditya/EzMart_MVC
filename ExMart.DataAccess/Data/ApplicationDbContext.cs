@@ -1,7 +1,7 @@
-﻿using EzMartWeb.Models;
+﻿using EzMart.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EzMartWeb.Data
+namespace EzMart.DataAccess.Data
 {
     public class ApplicationDbContext : DbContext
     {

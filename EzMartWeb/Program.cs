@@ -1,4 +1,4 @@
-using EzMartWeb.Data;
+using EzMart.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

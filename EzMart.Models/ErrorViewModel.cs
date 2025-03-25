@@ -1,4 +1,4 @@
-namespace EzMartWeb.Models
+namespace EzMart.Models
 {
     public class ErrorViewModel
     {
