@@ -3,8 +3,9 @@ using EzMart.Models;
 using EzMart.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EzMartWeb.Controllers
+namespace EzMartWeb.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -15,7 +16,7 @@ namespace EzMartWeb.Controllers
 
         public IActionResult Index()
         {
-            List<Category> categories = _unitOfWork.Category.GetAll().ToList() ;
+            List<Category> categories = _unitOfWork.Category.GetAll().ToList();
             return View(categories);
         }
 
@@ -28,7 +29,7 @@ namespace EzMartWeb.Controllers
         public IActionResult Create(Category category)
         {
             //Custom Validation
-            if(category.Name == category.DisplayOrder.ToString())
+            if (category.Name == category.DisplayOrder.ToString())
             {
                 ModelState.AddModelError("Name", "Category Name and Display Order cannot be same!!!");
             }
