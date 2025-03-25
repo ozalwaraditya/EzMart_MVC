@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ExMart.DataAccess\EzMart.DataAccess.csproj" />
     <ProjectReference Include="..\EzMart.Models\EzMart.Models.csproj" />
+    <ProjectReference Include="..\EzMart.Repository\EzMart.Repository.csproj" />
     <ProjectReference Include="..\EzMart.Utilities\EzMart.Utilities.csproj" />
   </ItemGroup>
 

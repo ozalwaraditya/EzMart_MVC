@@ -1,20 +1,21 @@
 ﻿using EzMart.DataAccess.Data;
 using EzMart.Models;
+using EzMart.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EzMartWeb.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        public CategoryController(ApplicationDbContext context)
+        private readonly IUnitOfWork _unitOfWork;
+        public CategoryController(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            List<Category> categories = _context.Categories.ToList() ;
+            List<Category> categories = _unitOfWork.Category.GetAll().ToList() ;
             return View(categories);
         }
 
@@ -33,8 +34,8 @@ namespace EzMartWeb.Controllers
             }
             if (ModelState.IsValid)
             {
-                _context.Categories.Add(category);
-                _context.SaveChanges();
+                _unitOfWork.Category.Add(category);
+                _unitOfWork.Save();
                 TempData["success"] = "Category added successfully!!!";
                 return RedirectToAction("Index");
             }
@@ -48,7 +49,7 @@ namespace EzMartWeb.Controllers
                 return NotFound();
             }
 
-            var category = _context.Categories.FirstOrDefault(i => i.Id == id);
+            var category = _unitOfWork.Category.Get(i => i.Id == id);
             if (category == null)
             {
                 return NotFound();
@@ -62,8 +63,8 @@ namespace EzMartWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Categories.Update(category);
-                _context.SaveChanges();
+                _unitOfWork.Category.Update(category);
+                _unitOfWork.Save();
                 TempData["success"] = "Category updated successfully!!!";
                 return RedirectToAction("Index");
             }
@@ -77,7 +78,7 @@ namespace EzMartWeb.Controllers
                 return NotFound();
             }
 
-            var category = _context.Categories.FirstOrDefault(i => i.Id == id);
+            var category = _unitOfWork.Category.Get(i => i.Id == id);
             if (category == null)
             {
                 return NotFound();
@@ -89,14 +90,14 @@ namespace EzMartWeb.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePost(int id)
         {
-            var category = _context.Categories.FirstOrDefault(c => c.Id == id);
+            var category = _unitOfWork.Category.Get(c => c.Id == id);
             if (category == null)
             {
                 return NotFound();
             }
 
-            _context.Categories.Remove(category);
-            _context.SaveChanges();
+            _unitOfWork.Category.Remove(category);
+            _unitOfWork.Save();
             TempData["success"] = "Category deleted successfully!!!";
             return RedirectToAction("Index");
         }

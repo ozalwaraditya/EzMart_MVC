@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EzMart.DataAccess", "ExMart
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EzMart.Utilities", "EzMart.Utilities\EzMart.Utilities.csproj", "{77058174-6446-4E18-A722-6C8CD28C3CD7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EzMart.Repository", "EzMart.Repository\EzMart.Repository.csproj", "{F368A1CC-368F-4B20-962A-2B4A78F4C775}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{77058174-6446-4E18-A722-6C8CD28C3CD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77058174-6446-4E18-A722-6C8CD28C3CD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77058174-6446-4E18-A722-6C8CD28C3CD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F368A1CC-368F-4B20-962A-2B4A78F4C775}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F368A1CC-368F-4B20-962A-2B4A78F4C775}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F368A1CC-368F-4B20-962A-2B4A78F4C775}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F368A1CC-368F-4B20-962A-2B4A78F4C775}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
