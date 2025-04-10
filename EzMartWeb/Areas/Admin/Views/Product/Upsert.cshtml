@@ -1,0 +1,127 @@
+﻿@model ProductViewModel
+
+@{
+    ViewData["Title"] = Model.Product.Id != 0 ? "Update Product" : "Add Product";
+}
+
+<form method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="row">
+            <div class="col-10">
+                <div class="border p-3 mt-4">
+
+                    @* Hidden Fields *@
+                    <input asp-for="Product.Id" hidden />
+                    <input asp-for="Product.ImgUrl" hidden />
+
+                    @* Heading *@
+                    <div class="row pb-2">
+                        <h2 class="text-primary">@ViewData["Title"]</h2>
+                        <hr />
+                    </div>
+
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    @* Product Title *@
+                    <div class="mb-3">
+                        <label asp-for="Product.Title" class="form-label">Product Title</label>
+                        <input asp-for="Product.Title" class="form-control input-shadow" placeholder="Enter product title" />
+                        <span asp-validation-for="Product.Title" class="text-danger"></span>
+                    </div>
+
+                    @* ISBN *@
+                    <div class="mb-3">
+                        <label asp-for="Product.ISBN" class="form-label">ISBN</label>
+                        <input asp-for="Product.ISBN" class="form-control input-shadow" placeholder="Enter ISBN" />
+                        <span asp-validation-for="Product.ISBN" class="text-danger"></span>
+                    </div>
+
+                    @* Author *@
+                    <div class="mb-3">
+                        <label asp-for="Product.Author" class="form-label">Author</label>
+                        <input asp-for="Product.Author" class="form-control input-shadow" placeholder="Enter author name" />
+                        <span asp-validation-for="Product.Author" class="text-danger"></span>
+                    </div>
+
+                    @* Description *@
+                    <div class="mb-3">
+                        <label asp-for="Product.Description" class="form-label">Description</label>
+                        <textarea asp-for="Product.Description" class="form-control input-shadow" placeholder="Enter product description"></textarea>
+                        <span asp-validation-for="Product.Description" class="text-danger"></span>
+                    </div>
+
+                    @* Category List *@
+                    <div class="form-floating py-2 col-12">
+                        <select asp-for="Product.CategoryId" asp-items="Model.CategoryList" class="form-select">
+                            <option disabled selected>--Select Category--</option>
+                        </select>
+                        <label asp-for="Product.CategoryId"></label>
+                        <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+                    </div>
+
+                    @* List Price *@
+                    <div class="mb-3">
+                        <label asp-for="Product.ListPrice" class="form-label">List Price</label>
+                        <input asp-for="Product.ListPrice" type="number" class="form-control input-shadow" placeholder="Enter list price" />
+                        <span asp-validation-for="Product.ListPrice" class="text-danger"></span>
+                    </div>
+
+                    @* Price for 1-50 *@
+                    <div class="mb-3">
+                        <label asp-for="Product.Price" class="form-label">Price (1-50)</label>
+                        <input asp-for="Product.Price" type="number" class="form-control input-shadow" placeholder="Enter price for 1-50" />
+                        <span asp-validation-for="Product.Price" class="text-danger"></span>
+                    </div>
+
+                    @* Price for 50+ *@
+                    <div class="mb-3">
+                        <label asp-for="Product.Price50" class="form-label">Price (50+)</label>
+                        <input asp-for="Product.Price50" type="number" class="form-control input-shadow" placeholder="Enter price for 50+" />
+                        <span asp-validation-for="Product.Price50" class="text-danger"></span>
+                    </div>
+
+                    @* Price for 100+ *@
+                    <div class="mb-3">
+                        <label asp-for="Product.Price100" class="form-label">Price (100+)</label>
+                        <input asp-for="Product.Price100" type="number" class="form-control input-shadow" placeholder="Enter price for 100+" />
+                        <span asp-validation-for="Product.Price100" class="text-danger"></span>
+                    </div>
+
+                    @* Image Upload Field *@
+                    <div class="mb-3">
+                        <label class="form-label">Upload Image</label>
+                        <input type="file" name="file" class="form-control input-shadow" />
+                        <div class="form-text text-muted">Or paste an image URL below</div>
+                    </div>
+
+
+                    @* Submit and Back Buttons *@
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-save"></i> Save
+                        </button>
+                        <a asp-controller="Product" asp-action="Index" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i> Back to List
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            @* Image Preview *@
+            <div class="col-2 mt-4">
+                @if (!string.IsNullOrEmpty(Model.Product.ImgUrl))
+                {
+                    <img src="@Model.Product.ImgUrl" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+                }
+                else
+                {
+                    <div class="text-muted">No image</div>
+                }
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -19,6 +19,8 @@ namespace EzMart.Repository
             _context = context;
             // This initializes dbSet for entity T, allowing LINQ queries and CRUD operations on that specific table.
             this.dbSet = _context.Set<T>();
+            //This will populate the foreign key properties of the entity
+            _context.Products.Include(p => p.Category).Include(p => p.CategoryId);
         }
 
         public void Add(T entity)
@@ -26,17 +28,32 @@ namespace EzMart.Repository
             dbSet.Add(entity);
         }
 
-        public T Get(Expression<Func<T, bool>> filter)
+        public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
             query = query.Where(filter);
             // _context.Category.Where(u=>u.id == Id).FirstorDefault();
+            if (includeProperties != null)
+            {
+                foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
             return query.FirstOrDefault();
         }
 
-        public IEnumerable<T> GetAll()
+        //Category, Cover Type
+        public IEnumerable<T> GetAll(string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
+            if (includeProperties != null)
+            {
+                foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
             return query.ToList();
         }
 
