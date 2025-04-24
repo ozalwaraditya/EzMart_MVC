@@ -2,6 +2,8 @@
 using EzMart.Models.ViewModels;
 using EzMart.Repository;
 using EzMart.Repository.IRepository;
+using EzMart.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Update.Internal;
@@ -9,6 +11,7 @@ using Microsoft.EntityFrameworkCore.Update.Internal;
 namespace EzMartWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(SD.Role_Admin)]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

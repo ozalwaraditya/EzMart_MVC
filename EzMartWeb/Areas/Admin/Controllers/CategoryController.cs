@@ -1,11 +1,14 @@
 ﻿using EzMart.DataAccess.Data;
 using EzMart.Models;
 using EzMart.Repository.IRepository;
+using EzMart.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EzMartWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(SD.Role_Admin)]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
