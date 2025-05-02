@@ -77,6 +77,11 @@
                 </select>
                 <label asp-for="Input.Role">Role</label>
             </div>
+            <div class="form-floating mb-4"> 
+                <select asp-for="Input.CompanyId" asp-items="@Model.Input.CompanyList" class="form-select"> 
+                    <option disabled selected>--Select Company--</option> 
+                </select> 
+            </div>
 
             <div class="d-grid">
                 <button id="registerSubmit" type="submit" class="btn btn-primary btn-lg">Register</button>
@@ -117,4 +122,23 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+         $(document).ready(function () {
+            function toggleCompanyDropdown() {
+                var selectedRole = $('#Input_Role option:selected').text();
+                if (selectedRole === 'Company') {
+                    $('#Input_CompanyId').closest('.form-floating').show();
+                } else {
+                    $('#Input_CompanyId').closest('.form-floating').hide();
+                }
+            }
+
+            toggleCompanyDropdown();
+
+            $('#Input_Role').change(function () {
+                toggleCompanyDropdown();
+            });
+        });
+    </script>
+    </script>
 }
