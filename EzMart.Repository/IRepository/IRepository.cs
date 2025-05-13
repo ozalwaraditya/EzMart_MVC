@@ -9,8 +9,8 @@ namespace EzMart.Repository.IRepository
 {
     public interface IRepository<T> where T : class
     {
-        IEnumerable<T> GetAll(string? includeProperties = null);
-        T Get(Expression<Func<T,bool>> filter, string? includeProperties = null);
+        IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null, string? includeProperties = null);
+        T Get(Expression<Func<T,bool>> filter, string? includeProperties = null , bool tracked = false); // We have added cause - to stop the default behaviour of EFCore the updation is tracked when we retriev the object from the database
         void Add(T entity);
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entities);
