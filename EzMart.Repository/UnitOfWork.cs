@@ -15,6 +15,9 @@ namespace EzMart.Repository
         public IProductRepository Product { get; private set; }
         public ICompanyRepository Company { get; private set; }
         public IShoppingCartRepository ShoppingCart { get; private set; }
+        public IApplicationUserRepository ApplicationUser { get; private set; }
+        public IOrderHeader OrderHeader { get; private set; }
+        public IOrderDetail OrderDetail { get; private set; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -23,6 +26,9 @@ namespace EzMart.Repository
             Product = new ProductRepository(_context);
             Company = new CompanyRepository(_context);
             ShoppingCart = new ShoppingCartRepository(_context);
+            ApplicationUser = new ApplicationUserRepository(_context);
+            OrderHeader = new OrderHeaderRepository(_context);
+            OrderDetail = new OrderDetailRepository(_context);
         }
 
 

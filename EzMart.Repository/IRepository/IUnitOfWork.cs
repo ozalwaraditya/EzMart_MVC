@@ -12,6 +12,9 @@ namespace EzMart.Repository.IRepository
         IProductRepository Product { get; }
         ICompanyRepository Company { get; }
         IShoppingCartRepository ShoppingCart { get; }
+        IApplicationUserRepository ApplicationUser { get; }
+        IOrderHeader OrderHeader { get; }
+        IOrderDetail OrderDetail { get; }
         void Save();
     }
 }
