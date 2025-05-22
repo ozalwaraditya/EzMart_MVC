@@ -50,10 +50,10 @@ namespace EzMartWeb.Areas.Customer.Controllers
         }
         public IActionResult Minus(int cartId)
         {
-            var cartInDb = _unitOfWork.ShoppingCart.Get(u => u.Id == cartId);
+            var cartInDb = _unitOfWork.ShoppingCart.Get(u => u.Id == cartId, tracked:true);
             if(cartInDb.Count <= 1)
             {
-                _unitOfWork.ShoppingCart.Remove(cartInDb);
+                _unitOfWork.ShoppingCart.Remove(cartInDb); HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == cartInDb.ApplicationUserId).Count() - 1);
             }
             else
             {
@@ -163,8 +163,9 @@ namespace EzMartWeb.Areas.Customer.Controllers
 
         public IActionResult Remove(int cartId)
         {
-            var cartInDb = _unitOfWork.ShoppingCart.Get(u => u.Id == cartId);
+            var cartInDb = _unitOfWork.ShoppingCart.Get(u => u.Id == cartId, tracked: true);
             _unitOfWork.ShoppingCart.Remove(cartInDb);
+            HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == cartInDb.ApplicationUserId).Count() - 1);
             _unitOfWork.Save();
             return RedirectToAction("Index");
         }

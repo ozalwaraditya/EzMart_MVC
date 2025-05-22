@@ -18,10 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EzMart.Models\EzMart.Models.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
+    <ProjectReference Include="..\EzMart.Utilities\EzMart.Utilities.csproj" />
   </ItemGroup>
 
 </Project>

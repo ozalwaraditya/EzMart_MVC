@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Security.Claims;
 using EzMart.Models;
 using EzMart.Repository.IRepository;
+using EzMart.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +22,14 @@ namespace EzMartWeb.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
+            //var claimIdentity = (ClaimsIdentity)User.Identity;
+            //var userId = claimIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            //if(userId != null)
+            //{
+            //    HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId).ToList().Count);
+            //}
+
             List<Product> products = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
             return View(products);
         }
@@ -55,14 +64,18 @@ namespace EzMartWeb.Areas.Admin.Controllers
             {
                 cartInDb.Count += shoppingCart.Count;
                 _unitOfWork.ShoppingCart.Update(cartInDb);
+                _unitOfWork.Save();
+                HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId).ToList().Count);
             }
             else
             {
                 _unitOfWork.ShoppingCart.Add(shoppingCart);
+                _unitOfWork.Save();
+                HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId).ToList().Count);
             }
 
-            _unitOfWork.Save();
-            
+            TempData["success"] = "Product added to cart successfully";
+
             return RedirectToAction("Index");
         }
 
