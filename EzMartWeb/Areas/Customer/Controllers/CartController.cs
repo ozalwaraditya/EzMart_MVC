@@ -120,7 +120,7 @@ namespace EzMartWeb.Areas.Customer.Controllers
             {
                 //Regular customer order
                 ShoppingCartViewModel.OrderHeader.PaymentStatus = SD.PaymentStatusPending;
-                ShoppingCartViewModel.OrderHeader.OrderStatus = SD.StatusPending;
+                ShoppingCartViewModel.OrderHeader.OrderStatus = SD.StatusApproved; //Since we dont integratted stripe payment yet - this will be statusApproved for now
             }
             else
             {

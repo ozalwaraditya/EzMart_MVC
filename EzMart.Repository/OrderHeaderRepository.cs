@@ -22,5 +22,18 @@ namespace EzMart.Repository
         {
             _context.Update(orderHeader);
         }
+
+        public void UpdateStatus(int id, string orderStatus, string? paymentStatus = null)
+        {
+            var orderFromDb = _context.OrderHeaders.FirstOrDefault(u => u.Id == id);
+            if (orderFromDb != null)
+            {
+                orderFromDb.OrderStatus = orderStatus;
+                {
+                if (!string.IsNullOrEmpty(paymentStatus))
+                    orderFromDb.PaymentStatus = paymentStatus;
+                }
+            }
+        }
     }
 }
